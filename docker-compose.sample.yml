@@ -2,6 +2,17 @@
 version: "3.3"
 
 services:
+  front-proxy:
+    image: envoyproxy/envoy:latest
+    command: /usr/local/bin/envoy -c /etc/envoy-front-proxy.yaml --service-cluster front-proxy
+    volumes:
+      - ./front-proxy.envoy.yaml:/etc/envoy-front-proxy.yaml
+    networks:
+      - envoymesh
+    ports:
+      - "80:80"
+      - "8001:8001"
+
   docker-registry:
     restart: unless-stopped
     image: joseluisq/envoy-docker-registry:latest

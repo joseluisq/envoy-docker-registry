@@ -1,6 +1,6 @@
 # Envoy / Docker Registry
 
-> [Envoy / Alpine x86_64](https://www.docker.com/) and [Docker Registry x86_64](https://hub.docker.com/_/registry) image.
+> [Envoy / Alpine x86_64](https://hub.docker.com/r/envoyproxy/envoy-alpine) and [Docker Registry x86_64](https://hub.docker.com/_/registry) image.
 
 ## Usage
 
@@ -18,15 +18,31 @@ FROM joseluisq/envoy-docker-registry:latest
 
 ### Docker Compose
 
+Below a [Front Proxy](https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/front_proxy) example using `docker-registry` as an Envoy service:
+
 ```yml
 version: "3.3"
 
 services:
+  # Envoy proxy
+  front-proxy:
+    image: envoyproxy/envoy:latest
+    command: /usr/local/bin/envoy -c /etc/envoy-front-proxy.yaml --service-cluster front-proxy
+    volumes:
+      - ./front-proxy.envoy.yaml:/etc/envoy-front-proxy.yaml
+    networks:
+      - envoymesh
+    ports:
+      - "80:80"
+      - "8001:8001"
+
   docker-registry:
     restart: unless-stopped
     image: joseluisq/envoy-docker-registry:latest
     environment:
+      # Docker Registry env variable
       - REGISTRY_HTTP_ADDR=0.0.0.0:5000
+      # Envoy service name
       - SERVICE_NAME=docker_registry
     volumes:
       - registry_data:/var/lib/registry
@@ -44,6 +60,16 @@ networks:
     external:
       name: envoymesh
 ```
+
+## Options
+
+### Envoy
+
+- `SERVICE_NAME` : The name of the Envoy service.
+
+### Docker Registry
+
+[All configuration variables](https://docs.docker.com/registry/configuration/) like `REGISTRY_HTTP_ADDR`, etc.
 
 ## Contributions
 
