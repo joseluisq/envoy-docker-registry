@@ -1,0 +1,25 @@
+
+version: "3.3"
+
+services:
+  docker-registry:
+    restart: unless-stopped
+    image: joseluisq/envoy-docker-registry:latest
+    environment:
+      - REGISTRY_HTTP_ADDR=0.0.0.0:5000
+      - SERVICE_NAME=docker_registry
+    volumes:
+      - registry_data:/var/lib/registry
+      - ./docker-registry.envoy.yaml:/etc/envoy-service.yaml
+    networks:
+      envoymesh:
+        aliases:
+          - docker_registry
+
+volumes:
+  registry_data:
+
+networks:
+  envoymesh:
+    external:
+      name: envoymesh
