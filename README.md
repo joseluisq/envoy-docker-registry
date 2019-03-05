@@ -1,6 +1,10 @@
-# Envoy / Docker Registry
+# Envoy / Docker Registry [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/joseluisq/envoy-docker-registry.svg)](https://hub.docker.com/r/joseluisq/envoy-docker-registry)
 
-> [Envoy / Alpine x86_64](https://hub.docker.com/r/envoyproxy/envoy-alpine) and [Docker Registry x86_64](https://hub.docker.com/_/registry) image.
+> [Envoy / Alpine](https://hub.docker.com/r/envoyproxy/envoy-alpine) and [Docker Registry](https://hub.docker.com/_/registry) x86_64 image.
+
+## Overview
+
+This image contains [Envoy](https://github.com/envoyproxy/envoy/blob/master/ci/Dockerfile-envoy-alpine) and [Docker Registry](https://github.com/docker/distribution-library-image) binaries as well as [Alpine](https://github.com/frol/docker-alpine-glibc) x86_64 for using it as an Envoy Service together with your Envoy Proxy.
 
 ## Usage
 
@@ -36,6 +40,7 @@ services:
       - "80:80"
       - "8001:8001"
 
+  # Envoy Service
   docker-registry:
     restart: unless-stopped
     image: joseluisq/envoy-docker-registry:latest
