@@ -1,4 +1,4 @@
-FROM envoyproxy/envoy-alpine:latest
+FROM envoyproxy/envoy-alpine:36f39c746eb7d03b762099b206403935b11972d8
 
 LABEL maintainer=https://git.io/joseluisq
 
