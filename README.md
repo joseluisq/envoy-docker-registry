@@ -1,4 +1,4 @@
-# Envoy / Docker Registry [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/joseluisq/envoy-docker-registry.svg)](https://hub.docker.com/r/joseluisq/envoy-docker-registry)
+# Envoy / Docker Registry [![](https://images.microbadger.com/badges/image/joseluisq/envoy-docker-registry.svg)](https://microbadger.com/images/joseluisq/envoy-docker-registry "Get your own image badge on microbadger.com") [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/joseluisq/envoy-docker-registry.svg)](https://hub.docker.com/r/joseluisq/envoy-docker-registry)
 
 > [Envoy / Alpine](https://hub.docker.com/r/envoyproxy/envoy-alpine) and [Docker Registry](https://hub.docker.com/_/registry) x86_64 image.
 
